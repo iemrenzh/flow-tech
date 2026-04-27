@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flow-Tech Air Conditioning | Miami's Trusted HVAC Since 1990</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy:    #0b1f3a;
+            --red:     #d9232a;
+            --orange:  #f59e0b;
+            --teal:    #0d9488;
+            --cream:   #faf8f4;
+            --offwhite:#f1efe9;
+            --muted:   #6b7280;
+            --border:  #e2ddd6;
+            --white:   #ffffff;
+        }
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { font-family:'Inter',sans-serif; font-weight:400; color:var(--navy); background:var(--white); overflow-x:hidden; line-height:1.6; }
+        h1,h2,h3,h4 { font-family:'Playfair Display',serif; font-weight:500; line-height:1.1; letter-spacing:-0.01em; }
+        p { font-weight:300; }
+        a { text-decoration:none; }
+
+        /* Scroll reveal */
+        .reveal { opacity:0; transform:translateY(24px); transition:opacity .7s ease,transform .7s ease; }
+        .reveal.visible { opacity:1; transform:none; }
+        .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s}
+
+        /* ── TOP BAR ── */
+        .topbar { background:var(--navy); padding:9px 0; border-bottom:2px solid var(--orange); }
+        .topbar-inner { max-width:1280px; margin:0 auto; padding:0 28px; display:flex; justify-content:space-between; align-items:center; }
+        .topbar-left { display:flex; gap:24px; }
+        .topbar span { color:rgba(255,255,255,.65); font-size:.78rem; display:flex; align-items:center; gap:7px; }
+        .topbar svg { flex-shrink:0; }
+        .topbar a.cta-call { color:var(--orange); font-size:.78rem; font-weight:600; letter-spacing:.06em; display:flex; align-items:center; gap:7px; }
+
+        /* ── NAVBAR ── */
+        .navbar { position:sticky; top:0; z-index:900; background:rgba(255,255,255,.97); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
+        .nav-inner { max-width:1280px; margin:0 auto; padding:0 28px; display:flex; justify-content:space-between; align-items:center; height:72px; }
+        .logo img { height:50px; display:block; }
+        .nav-links { display:flex; gap:30px; }
+        .nav-links a { color:var(--navy); font-size:.8rem; font-weight:500; letter-spacing:.05em; text-transform:uppercase; opacity:.65; transition:opacity .2s; }
+        .nav-links a:hover { opacity:1; }
+        .nav-cta { background:var(--red); color:#fff; font-size:.75rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; padding:11px 26px; transition:background .2s; }
+        .nav-cta:hover { background:#b91c22; }
+
+        /* ── HERO ── */
+        .hero { position:relative; min-height:90vh; display:flex; align-items:center; background:var(--navy); overflow:hidden; }
+        .hero-bg { position:absolute; inset:0; background:url('https://images.pexels.com/photos/3964736/pexels-photo-3964736.jpeg?auto=compress&cs=tinysrgb&w=1920') center/cover no-repeat; opacity:.22; }
+        .hero-inner { position:relative; z-index:2; max-width:1280px; margin:0 auto; padding:60px 28px; display:grid; grid-template-columns:1fr 420px; gap:70px; align-items:center; width:100%; }
+        .hero-tag { display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(245,158,11,.45); color:var(--orange); font-size:.7rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; padding:6px 14px; margin-bottom:24px; }
+        .hero h1 { color:#fff; font-size:clamp(2.6rem,4.5vw,4.4rem); font-weight:500; margin-bottom:24px; }
+        .hero h1 em { color:var(--orange); font-style:normal; }
+        .hero-desc { color:rgba(255,255,255,.62); font-size:1rem; line-height:1.8; max-width:460px; margin-bottom:40px; }
+        .hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
+        .btn-red { background:var(--red); color:#fff; display:inline-flex; align-items:center; gap:10px; padding:14px 30px; font-size:.8rem; font-weight:600; letter-spacing:.07em; text-transform:uppercase; transition:background .2s,transform .2s; }
+        .btn-red:hover { background:#b91c22; transform:translateY(-2px); }
+        .btn-ghost { background:transparent; color:#fff; display:inline-flex; align-items:center; gap:10px; padding:13px 30px; font-size:.8rem; font-weight:500; letter-spacing:.07em; text-transform:uppercase; border:1px solid rgba(255,255,255,.3); transition:border-color .2s,background .2s; }
+        .btn-ghost:hover { border-color:#fff; background:rgba(255,255,255,.05); }
+
+        .hero-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.1); margin-top:52px; }
+        .stat { padding:22px 16px; text-align:center; }
+        .stat-num { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:600; color:var(--orange); line-height:1; }
+        .stat-lbl { font-size:.68rem; color:rgba(255,255,255,.45); margin-top:5px; letter-spacing:.06em; text-transform:uppercase; }
+
+        /* Booking card */
+        .booking-card { background:#fff; padding:40px 36px; position:relative; box-shadow:0 40px 80px rgba(0,0,0,.45); }
+        .booking-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--orange),var(--red)); }
+        .booking-card h3 { font-size:1.65rem; margin-bottom:6px; }
+        .booking-card .sub { color:var(--muted); font-size:.82rem; margin-bottom:24px; }
+        .fc { display:flex; flex-direction:column; gap:12px; }
+        .fc input, .fc select { width:100%; padding:12px 14px; border:1px solid var(--border); outline:none; font-family:'Inter',sans-serif; font-size:.85rem; color:var(--navy); background:var(--cream); transition:border-color .2s; }
+        .fc input:focus, .fc select:focus { border-color:var(--teal); }
+        .fc-btn { width:100%; padding:14px; background:var(--navy); color:#fff; border:none; cursor:pointer; font-family:'Inter',sans-serif; font-size:.78rem; font-weight:600; letter-spacing:.09em; text-transform:uppercase; margin-top:2px; transition:background .2s; }
+        .fc-btn:hover { background:var(--teal); }
+        .trust { display:flex; align-items:center; gap:8px; margin-top:14px; font-size:.72rem; color:var(--muted); }
+
+        /* ── VALUE STRIP ── */
+        .vstrip { background:var(--teal); padding:52px 0; }
+        .vgrid { max-width:1280px; margin:0 auto; padding:0 28px; display:grid; grid-template-columns:repeat(5,1fr); }
+        .vi { padding:20px 12px; text-align:center; border-right:1px solid rgba(255,255,255,.18); }
+        .vi:last-child { border-right:none; }
+        .vi svg { display:block; margin:0 auto 12px; }
+        .vi p { color:rgba(255,255,255,.82); font-size:.72rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; }
+
+        /* ── SECTIONS ── */
+        .section { padding:100px 0; }
+        .wrap { max-width:1280px; margin:0 auto; padding:0 28px; }
+        .slabel { display:inline-block; font-size:.68rem; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--teal); margin-bottom:14px; }
+        .stitle { font-size:clamp(1.9rem,3vw,2.8rem); margin-bottom:18px; }
+        .divider { width:44px; height:2px; background:var(--orange); margin:18px 0; }
+        .ssub { color:var(--muted); font-size:.92rem; line-height:1.8; max-width:500px; }
+
+        /* ── PAIN ── */
+        .pain-section { background:var(--cream); }
+        .pain-layout { display:grid; grid-template-columns:1fr 2fr; gap:80px; align-items:start; }
+        .pain-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--border); }
+        .pcard { background:#fff; padding:28px; transition:background .25s; cursor:default; }
+        .pcard:hover { background:var(--navy); }
+        .pcard:hover h4 { color:#fff; }
+        .pcard:hover p { color:rgba(255,255,255,.55); }
+        .pcard:hover .pico { color:var(--orange); }
+        .pico { color:var(--red); margin-bottom:14px; display:block; transition:color .25s; }
+        .pcard h4 { font-family:'Inter',sans-serif; font-weight:600; font-size:.88rem; margin-bottom:7px; transition:color .25s; }
+        .pcard p { font-size:.8rem; color:var(--muted); line-height:1.7; transition:color .25s; }
+        .pcard.wide { grid-column:1/-1; }
+
+        /* ── ABOUT ── */
+        .about-layout { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+        .about-img-wrap { position:relative; }
+        .about-img { width:100%; aspect-ratio:4/5; object-fit:cover; display:block; }
+        .about-badge { position:absolute; bottom:-22px; right:-22px; background:var(--orange); color:var(--navy); width:114px; height:114px; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:'Playfair Display',serif; }
+        .ab-num { font-size:2.6rem; font-weight:600; line-height:1; }
+        .ab-lbl { font-size:.58rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; text-align:center; margin-top:2px; }
+        .flist { list-style:none; margin-top:26px; }
+        .flist li { display:flex; align-items:flex-start; gap:13px; padding:13px 0; border-bottom:1px solid var(--border); font-size:.88rem; }
+        .flist li:last-child { border-bottom:none; }
+        .flist .fcheck { color:var(--teal); flex-shrink:0; margin-top:2px; }
+
+        /* ── REVIEWS ── */
+        .rev-section { background:var(--navy); overflow:hidden; padding:100px 0; }
+        .rev-section .slabel { color:var(--orange); }
+        .rev-section .stitle { color:#fff; }
+        .rev-section .divider { background:var(--orange); }
+        .track-wrap { overflow:hidden; margin-top:52px; }
+        .track { display:flex; gap:22px; width:max-content; animation:scroll 52s linear infinite; }
+        .track:hover { animation-play-state:paused; }
+        @keyframes scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+        .rcard { width:340px; flex-shrink:0; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); padding:28px; position:relative; }
+        .rcard-quote { font-family:'Playfair Display',serif; font-size:5rem; color:var(--orange); opacity:.15; position:absolute; top:8px; right:18px; line-height:1; }
+        .stars { color:var(--orange); font-size:.75rem; letter-spacing:3px; margin-bottom:14px; }
+        .rcard p { color:rgba(255,255,255,.68); font-size:.85rem; line-height:1.8; margin-bottom:18px; }
+        .rcard cite { color:rgba(255,255,255,.35); font-size:.72rem; font-style:normal; letter-spacing:.05em; }
+
+        /* ── SATISFACTION ── */
+        .sat { background:linear-gradient(135deg,var(--red),#a81019); padding:80px 0; }
+        .sat-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+        .sat h2 { color:#fff; font-size:2.4rem; margin-bottom:14px; }
+        .sat .desc { color:rgba(255,255,255,.7); line-height:1.8; font-size:.92rem; }
+        .sat-list { list-style:none; display:flex; flex-direction:column; gap:15px; }
+        .sat-list li { display:flex; align-items:center; gap:13px; color:rgba(255,255,255,.88); font-size:.88rem; }
+        .sat-chk { width:26px; height:26px; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+
+        /* ── JOURNEY ── */
+        .journey-section { background:var(--offwhite); }
+        .journey-grid { display:grid; grid-template-columns:repeat(3,1fr); margin-top:56px; position:relative; }
+        .journey-grid::before { content:''; position:absolute; top:43px; left:calc(16.66% + 20px); right:calc(16.66% + 20px); height:1px; background:var(--border); }
+        .jstep { padding:0 28px; text-align:center; }
+        .jnum { width:86px; height:86px; background:var(--navy); color:#fff; font-family:'Playfair Display',serif; font-size:1.9rem; font-weight:500; display:flex; align-items:center; justify-content:center; margin:0 auto 26px; position:relative; z-index:1; }
+        .jstep h3 { font-size:1.4rem; margin-bottom:10px; }
+        .jstep p { font-size:.83rem; color:var(--muted); line-height:1.8; }
+
+        /* ── FAQ ── */
+        .faq-inner { max-width:740px; margin:56px auto 0; }
+        .faq-item { border-bottom:1px solid var(--border); }
+        .faq-q { display:flex; justify-content:space-between; align-items:center; padding:20px 0; cursor:pointer; gap:20px; }
+        .faq-q h4 { font-family:'Inter',sans-serif; font-weight:500; font-size:.92rem; }
+        .faq-ico { width:26px; height:26px; background:var(--navy); display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s,transform .3s; }
+        .faq-item.open .faq-ico { background:var(--teal); transform:rotate(45deg); }
+        .faq-body { max-height:0; overflow:hidden; transition:max-height .4s ease,padding .3s; color:var(--muted); font-size:.86rem; line-height:1.8; }
+        .faq-item.open .faq-body { max-height:200px; padding-bottom:20px; }
+
+        /* ── CONTACT ── */
+        .contact-section { background:var(--cream); }
+        .contact-layout { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
+        .ci-list { list-style:none; margin:28px 0; display:flex; flex-direction:column; gap:16px; }
+        .ci-list li { display:flex; align-items:center; gap:14px; font-size:.88rem; }
+        .ci-ico { width:42px; height:42px; background:var(--navy); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+        .map-frame { width:100%; height:230px; border:none; display:block; filter:grayscale(20%) contrast(1.05); }
+        .cf-field { width:100%; padding:13px 14px; border:1px solid var(--border); background:#fff; outline:none; font-family:'Inter',sans-serif; font-size:.85rem; color:var(--navy); margin-bottom:13px; transition:border-color .2s; }
+        .cf-field:focus { border-color:var(--teal); }
+        textarea.cf-field { resize:vertical; min-height:110px; }
+        .cf-btn { width:100%; padding:14px; background:var(--navy); color:#fff; border:none; cursor:pointer; font-family:'Inter',sans-serif; font-size:.78rem; font-weight:600; letter-spacing:.09em; text-transform:uppercase; transition:background .2s; }
+        .cf-btn:hover { background:var(--teal); }
+
+        /* ── FOOTER ── */
+        footer { background:var(--navy); color:#fff; padding:80px 0 36px; }
+        .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:56px; }
+        .footer-logo { height:50px; filter:brightness(0) invert(1); display:block; margin-bottom:18px; }
+        .footer-about { color:rgba(255,255,255,.4); font-size:.8rem; line-height:1.8; max-width:240px; }
+        .fcol h5 { font-family:'Inter',sans-serif; font-weight:600; font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--orange); margin-bottom:18px; }
+        .fcol ul { list-style:none; display:flex; flex-direction:column; gap:9px; }
+        .fcol ul li, .fcol ul li a { color:rgba(255,255,255,.4); font-size:.8rem; transition:color .2s; }
+        .fcol ul li a:hover { color:#fff; }
+        .social-row { display:flex; gap:10px; margin-top:18px; }
+        .soc-btn { width:36px; height:36px; background:rgba(255,255,255,.07); display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.45); transition:background .2s,color .2s; }
+        .soc-btn:hover { background:var(--orange); color:#fff; }
+        .footer-btm { border-top:1px solid rgba(255,255,255,.08); margin-top:56px; padding-top:26px; display:flex; justify-content:space-between; align-items:center; }
+        .footer-btm p { font-size:.7rem; color:rgba(255,255,255,.22); }
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:1024px){
+            .hero-inner,.about-layout,.contact-layout{grid-template-columns:1fr;gap:44px}
+            .booking-card{display:none}
+            .pain-layout{grid-template-columns:1fr;gap:36px}
+            .sat-grid{grid-template-columns:1fr}
+            .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
+            .vgrid{grid-template-columns:repeat(3,1fr)}
+        }
+        @media(max-width:768px){
+            .nav-links{display:none}
+            .section{padding:64px 0}
+            .pain-grid{grid-template-columns:1fr}
+            .journey-grid{grid-template-columns:1fr}
+            .journey-grid::before{display:none}
+            .jstep{padding:22px 0}
+            .footer-grid{grid-template-columns:1fr}
+            .vgrid{grid-template-columns:1fr 1fr}
+            .hero-stats{grid-template-columns:1fr 1fr}
+        }
+    </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+    <div class="topbar-inner">
+        <div class="topbar-left">
+            <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Miami-Dade County, FL
+            </span>
+            <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Open 24/7
+            </span>
+        </div>
+        <a href="tel:+13052645051" class="cta-call">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            CALL: (305) 264-5051
+        </a>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-inner">
+        <div class="logo">
+            <img src="https://flowtechac.com/wp-content/uploads/2022/01/Flowtech-Sunny-Bliss-Plumbing-Air-Logo-1.png" alt="Flow-Tech Air Conditioning">
+        </div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <a href="#contact" class="nav-cta">Free Quote</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+        <div>
+            <div class="hero-tag reveal">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Miami's Most Trusted HVAC
+            </div>
+            <h1 class="reveal d1">Keeping Miami <em>Cool</em><br>Since 1990</h1>
+            <p class="hero-desc reveal d2">Expert air conditioning solutions built for South Florida's heat. Transparent pricing. Certified technicians. Real peace of mind.</p>
+            <div class="hero-btns reveal d3">
+                <a href="tel:+13052645051" class="btn-red">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    (305) 264-5051
+                </a>
+                <a href="#contact" class="btn-ghost">Book Online</a>
+            </div>
+            <div class="hero-stats reveal d4">
+                <div class="stat"><div class="stat-num">35+</div><div class="stat-lbl">Years Experience</div></div>
+                <div class="stat"><div class="stat-num">5K+</div><div class="stat-lbl">Happy Clients</div></div>
+                <div class="stat"><div class="stat-num">24/7</div><div class="stat-lbl">Emergency Service</div></div>
+            </div>
+        </div>
+
+        <!-- Booking Card -->
+        <div class="booking-card reveal d2">
+            <h3>Get a Free Estimate</h3>
+            <p class="sub">We'll respond within 24 hours.</p>
+            <div class="fc">
+                <input type="text" placeholder="Full Name">
+                <input type="tel" placeholder="Phone Number">
+                <select>
+                    <option value="">Select Service</option>
+                    <option>AC Repair</option>
+                    <option>AC Installation</option>
+                    <option>Maintenance / Tune-Up</option>
+                    <option>Plumbing</option>
+                </select>
+                <button class="fc-btn">Request Estimate &rarr;</button>
+            </div>
+            <div class="trust">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Licensed, Insured &amp; BBB Accredited
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- VALUE STRIP -->
+<div class="vstrip">
+    <div class="vgrid">
+        <div class="vi">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            <p>Efficient Cooling</p>
+        </div>
+        <div class="vi">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <p>Transparent Pricing</p>
+        </div>
+        <div class="vi">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+            <p>Expert Solutions</p>
+        </div>
+        <div class="vi">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <p>Certified Technicians</p>
+        </div>
+        <div class="vi">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <p>Same-Day Service</p>
+        </div>
+    </div>
+</div>
+
+<!-- PAIN POINTS -->
+<section class="section pain-section" id="services">
+    <div class="wrap">
+        <div class="pain-layout">
+            <div class="reveal">
+                <span class="slabel">Sound Familiar?</span>
+                <h2 class="stitle">Is This <span style="color:var(--red)">You?</span></h2>
+                <div class="divider"></div>
+                <p class="ssub">If any of these feel familiar, you've come to the right place. Flow-Tech exists to solve these exact problems — permanently.</p>
+            </div>
+            <div class="pain-grid reveal d1">
+                <div class="pcard">
+                    <svg class="pico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+                    <h4>Unit Can't Keep Up</h4>
+                    <p>Your AC runs all day but your home never reaches a comfortable temperature.</p>
+                </div>
+                <div class="pcard">
+                    <svg class="pico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                    <h4>Sticky &amp; Humid Indoors</h4>
+                    <p>Uncomfortable moisture even when the thermostat says it's cool.</p>
+                </div>
+                <div class="pcard">
+                    <svg class="pico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <h4>Too Many Options</h4>
+                    <p>A sea of contractors and no easy way to know who you can actually trust.</p>
+                </div>
+                <div class="pcard">
+                    <svg class="pico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    <h4>Surprise Bills</h4>
+                    <p>Past technicians left you with unexpected charges and zero explanation.</p>
+                </div>
+                <div class="pcard wide">
+                    <svg class="pico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <h4>Conflicting Advice</h4>
+                    <p>Every tech tells you something different — repair vs. replace, brand A vs. brand B. It's exhausting and costly.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+    <div class="wrap">
+        <div class="about-layout">
+            <div class="about-img-wrap reveal">
+                <img class="about-img" src="https://images.pexels.com/photos/8005397/pexels-photo-8005397.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Flow-Tech certified technician at work">
+                <div class="about-badge">
+                    <span class="ab-num">35</span>
+                    <span class="ab-lbl">Years of<br>Trust</span>
+                </div>
+            </div>
+            <div class="reveal d2">
+                <span class="slabel">Who We Are</span>
+                <h2 class="stitle">Miami's HVAC Experts,<br>Since 1990</h2>
+                <div class="divider"></div>
+                <p style="color:var(--muted);line-height:1.85;font-size:.92rem;">At Flow-Tech Air Conditioning, we understand what South Florida heat does to a home — and to your patience. We've spent over three decades building a reputation on honest work, expert craftsmanship, and genuine care for every client we serve.</p>
+                <ul class="flist">
+                    <li>
+                        <svg class="fcheck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Repairs, replacements &amp; maintenance for all major brands
+                    </li>
+                    <li>
+                        <svg class="fcheck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Trained in high-efficiency systems and latest technology
+                    </li>
+                    <li>
+                        <svg class="fcheck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Fully licensed, insured &amp; BBB Accredited
+                    </li>
+                    <li>
+                        <svg class="fcheck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Upfront pricing — zero hidden fees, ever
+                    </li>
+                </ul>
+                <a href="#contact" class="btn-red" style="margin-top:32px;display:inline-flex;">Request a Free Estimate &rarr;</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="rev-section" id="reviews">
+    <div class="wrap">
+        <span class="slabel reveal">Client Reviews</span>
+        <h2 class="stitle reveal d1">What Miami Homeowners Say</h2>
+        <div class="divider reveal d2"></div>
+    </div>
+    <div class="track-wrap">
+        <div class="track">
+            <div class="rcard"><div class="rcard-quote">"</div><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"I've been working with Flow-Tech for several years. I really love how they value their clients. Techs are always punctual and honest."</p><cite>— Jackie M., Miami</cite></div>
+            <div class="rcard"><div class="rcard-quote">"</div><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Transparent pricing and great communication. The South Florida heat is no joke and they had our unit running the same day."</p><cite>— Robert G., Coral Gables</cite></div>
+            <div class="rcard"><div class="rcard-quote">"</div><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Best AC company in Miami. Showed up on time, explained everything, and the price was exactly what they quoted. No surprises."</p><cite>— Maria L., Doral</cite></div>
+            <div class="rcard"><div class="rcard-quote">"</div><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Our AC broke during a heat wave and they came out the same evening. Incredibly professional team. Highly recommend."</p><cite>— David R., Hialeah</cite></div>
+            <div class="rcard"><div class="rcard-quote">"</div><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Finally found an AC company I can trust. Honest, fair, and fast. Our home feels amazing now. Won't call anyone else."</p><cite>— Sandra P., Kendall</cite></div>
+            <!-- clones -->
+            <div class="rcard"><div class="rcard-quote">"</div><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"I've been working with Flow-Tech for several years. I really love how they value their clients. Techs are always punctual and honest."</p><cite>— Jackie M., Miami</cite></div>
+            <div class="rcard"><div class="rcard-quote">"</div><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Transparent pricing and great communication. The South Florida heat is no joke and they had our unit running the same day."</p><cite>— Robert G., Coral Gables</cite></div>
+            <div class="rcard"><div class="rcard-quote">"</div><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Best AC company in Miami. Showed up on time, explained everything, and the price was exactly what they quoted. No surprises."</p><cite>— Maria L., Doral</cite></div>
+            <div class="rcard"><div class="rcard-quote">"</div><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Our AC broke during a heat wave and they came out the same evening. Incredibly professional team. Highly recommend."</p><cite>— David R., Hialeah</cite></div>
+            <div class="rcard"><div class="rcard-quote">"</div><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Finally found an AC company I can trust. Honest, fair, and fast. Our home feels amazing now. Won't call anyone else."</p><cite>— Sandra P., Kendall</cite></div>
+        </div>
+    </div>
+</section>
+
+<!-- SATISFACTION BANNER -->
+<section class="sat">
+    <div class="wrap">
+        <div class="sat-grid">
+            <div class="reveal">
+                <h2>Your Satisfaction Is Our Priority</h2>
+                <p class="desc">We are dedicated to keeping your home cool and comfortable — with personalized solutions and real follow-through on every job.</p>
+            </div>
+            <ul class="sat-list reveal d2">
+                <li><div class="sat-chk"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div> Prompt response within 24 hours</li>
+                <li><div class="sat-chk"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div> Expert care by certified technicians</li>
+                <li><div class="sat-chk"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div> Transparent, honest, upfront pricing</li>
+                <li><div class="sat-chk"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div> Satisfaction guaranteed on every job</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- JOURNEY -->
+<section class="section journey-section">
+    <div class="wrap">
+        <div style="text-align:center" class="reveal">
+            <span class="slabel">The Process</span>
+            <h2 class="stitle">Your Comfort Journey</h2>
+            <div class="divider" style="margin:18px auto"></div>
+        </div>
+        <div class="journey-grid">
+            <div class="jstep reveal d1">
+                <div class="jnum">01</div>
+                <h3>Call or Book</h3>
+                <p>Tell us what's happening. We listen, ask the right questions, and schedule you at a time that works.</p>
+            </div>
+            <div class="jstep reveal d2">
+                <div class="jnum">02</div>
+                <h3>Custom Plan</h3>
+                <p>Our certified tech diagnoses the issue and presents clear options — repair, tune-up, or replacement — with upfront pricing.</p>
+            </div>
+            <div class="jstep reveal d3">
+                <div class="jnum">03</div>
+                <h3>Relax</h3>
+                <p>We get to work. Your home returns to being the cool, comfortable haven it should always be.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+    <div class="wrap">
+        <div style="text-align:center" class="reveal">
+            <span class="slabel">FAQ</span>
+            <h2 class="stitle">Frequently Asked Questions</h2>
+            <div class="divider" style="margin:18px auto"></div>
+        </div>
+        <div class="faq-inner reveal d1">
+            <div class="faq-item">
+                <div class="faq-q">
+                    <h4>Do you offer emergency AC repair?</h4>
+                    <div class="faq-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+                </div>
+                <div class="faq-body">Yes — we offer 24/7 emergency AC repair across Miami-Dade County. Call us anytime at (305) 264-5051 and we'll dispatch a technician as quickly as possible.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">
+                    <h4>What brands do you service?</h4>
+                    <div class="faq-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+                </div>
+                <div class="faq-body">We service all major AC and HVAC brands including Carrier, Lennox, Trane, Rheem, Goodman, and more. Our technicians are trained on the latest high-efficiency systems.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">
+                    <h4>How do I know if I need a repair or a full replacement?</h4>
+                    <div class="faq-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+                </div>
+                <div class="faq-body">Our technicians give you an honest, unbiased recommendation based on the age of your system, repair costs, and energy efficiency. We never push replacements unnecessarily.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">
+                    <h4>Are your prices upfront?</h4>
+                    <div class="faq-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+                </div>
+                <div class="faq-body">Always. We provide a full quote before any work begins. No surprise charges, no fine print. What we quote is what you pay.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">
+                    <h4>Is Flow-Tech licensed and insured?</h4>
+                    <div class="faq-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+                </div>
+                <div class="faq-body">Yes. Flow-Tech is fully licensed, insured, and BBB Accredited. You're in safe, professional hands from start to finish.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+    <div class="wrap">
+        <div class="contact-layout">
+            <div class="reveal">
+                <span class="slabel">Get In Touch</span>
+                <h2 class="stitle">We're Ready<br>to Help</h2>
+                <div class="divider"></div>
+                <p style="color:var(--muted);font-size:.88rem;line-height:1.85;">Reach out by phone or use the form. We respond to all inquiries within 24 hours — often the same day.</p>
+                <ul class="ci-list">
+                    <li>
+                        <div class="ci-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                        7023 SW 13th Terrace, Miami, FL 33144
+                    </li>
+                    <li>
+                        <div class="ci-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+                        (305) 264-5051
+                    </li>
+                    <li>
+                        <div class="ci-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                        Available 24/7 for emergencies
+                    </li>
+                </ul>
+                <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3593.4282367184496!2d-80.31298482439564!3d25.756372577357062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b76f9d77e415%3A0x6a0c034766f88f2!2s7023%20SW%2013th%20Ter%2C%20Miami%2C%20FL%2033144!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <div class="reveal d2">
+                <div class="booking-card" style="box-shadow:0 20px 48px rgba(0,0,0,.08);display:block;">
+                    <h3>Request a Free Estimate</h3>
+                    <p class="sub">Tell us what you need and we'll get back to you promptly.</p>
+                    <input type="text" class="cf-field" placeholder="Full Name">
+                    <input type="email" class="cf-field" placeholder="Email Address">
+                    <input type="tel" class="cf-field" placeholder="Phone Number">
+                    <select class="cf-field">
+                        <option value="">Select Service</option>
+                        <option>AC Repair</option>
+                        <option>AC Installation</option>
+                        <option>Maintenance / Tune-Up</option>
+                        <option>Plumbing</option>
+                    </select>
+                    <textarea class="cf-field" rows="3" placeholder="Describe your issue..."></textarea>
+                    <button class="cf-btn">Send Request &rarr;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="wrap">
+        <div class="footer-grid">
+            <div>
+                <img src="https://flowtechac.com/wp-content/uploads/2022/01/Flowtech-Sunny-Bliss-Plumbing-Air-Logo-1.png" alt="Flow-Tech" class="footer-logo">
+                <p class="footer-about">Miami's trusted HVAC specialists since 1990. Keeping South Florida homes cool with honest service and expert craftsmanship.</p>
+                <div class="social-row">
+                    <a href="#" class="soc-btn" aria-label="Facebook">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="#" class="soc-btn" aria-label="Instagram">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                    <a href="#" class="soc-btn" aria-label="Google">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="fcol">
+                <h5>Navigation</h5>
+                <ul>
+                    <li><a href="#about">Who We Are</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="fcol">
+                <h5>Services</h5>
+                <ul>
+                    <li>AC Repair</li>
+                    <li>AC Installation</li>
+                    <li>Maintenance</li>
+                    <li>Plumbing</li>
+                    <li>Emergency Service</li>
+                </ul>
+            </div>
+            <div class="fcol">
+                <h5>Contact</h5>
+                <ul>
+                    <li>(305) 264-5051</li>
+                    <li>7023 SW 13th Terrace</li>
+                    <li>Miami, FL 33144</li>
+                    <li style="color:var(--orange);margin-top:6px;">Open 24/7</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-btm">
+            <p>&copy; 2026 Flow-Tech Air Conditioning Corp. All Rights Reserved.</p>
+            <p>Licensed &middot; Insured &middot; BBB Accredited</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.querySelector('.faq-q').addEventListener('click', () => {
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        });
+    });
+
+    // Scroll reveal
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
